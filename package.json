@@ -1,0 +1,43 @@
+{
+  "name": "wt-gui",
+  "productName": "WT-Gui",
+  "version": "0.0.1",
+  "description": "Perform Haar wavelet transformation up to lvl 2 in a gui (hopefully)",
+  "main": "main.js",
+  "license": "GPL-3.0-or-later",
+  "repository": "",
+  "author": {
+    "name": "Klaus Schwarz",
+    "email": "schwarz@posteo.de",
+    "url": ""
+  },
+  "scripts": {
+    "test": "xo",
+    "start": "electron .",
+    "build": "electron-packager . --out=dist --asar --overwrite --all"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "bootstrap": "^4.3.1",
+    "electron-debug": "^2.0.0",
+    "electron-json-storage": "^4.1.6",
+    "jquery": "^3.3.1",
+    "npm-bundle": "^3.0.3",
+    "popper.js": "^1.14.7",
+    "spin.js": "^4.0.0",
+    "tiff.js": "^1.0.0"
+  },
+  "devDependencies": {
+    "devtron": "^1.4.0",
+    "electron": "^2.0.2",
+    "electron-packager": "^12.1.0",
+    "xo": "^0.21.1"
+  },
+  "xo": {
+    "envs": [
+      "node",
+      "browser"
+    ]
+  }
+}
