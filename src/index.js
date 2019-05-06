@@ -3,11 +3,12 @@ const dialog = require('electron').remote.dialog;
 const selectDirBtn = document.getElementById('select-image');
 const revert = document.getElementById('revert');
 const deviderBtn = document.getElementById('devider');
-var haarTdata = [];
+const contrastBtn = document.getElementById('contrast');
 let filePath = "";
 let lvl;
 var devider = 2;
 var dvdr = false;
+var contrast = false;
 var area1 = [];
 var area2 = [];
 var area3 = [];
@@ -44,8 +45,23 @@ deviderBtn.addEventListener('click', (event) => {
   }
 });
 
+contrastBtn.addEventListener('click', (event) => {
+  if(!(filePath == "")){
+    if (!contrast) {
+      contrast = true;
+    } else {
+      contrast = false;
+    }
+    haarTdata = [];
+    a1=0,a2=0,a3=0,a4=0,a5=0,a6=0,a7=0,a8 = 0;
+    area1=[],area2=[],area3=[],area4=[],area5=[],area6=[],area7=[],area8=[];
+    performHaarT(document.getElementById('originalImage'), lvl);
+  }
+});
+
 revert.addEventListener('click', (event) => {
   if(!(filePath == "")){
+    contrast = false;
     haarTdata = [];
     a1=0,a2=0,a3=0,a4=0,a5=0,a6=0,a7=0,a8 = 0;
     area1=[],area2=[],area3=[],area4=[],area5=[],area6=[],area7=[],area8=[];
@@ -58,6 +74,7 @@ revert.addEventListener('click', (event) => {
 });
 
 selectDirBtn.addEventListener('click', (event) => {
+  contrast = false;
   haarTdata = [];
   a1=0,a2=0,a3=0,a4=0,a5=0,a6=0,a7=0,a8 = 0;
   area1=[],area2=[],area3=[],area4=[],area5=[],area6=[],area7=[],area8=[];
@@ -92,8 +109,6 @@ window.addEventListener("load", function(){
     haarTdata = [];
     a1=0,a2=0,a3=0,a4=0,a5=0,a6=0,a7=0,a8 = 0;
     area1=[],area2=[],area3=[],area4=[],area5=[],area6=[],area7=[],area8=[];
-    dvdr = false;
-    devider = 2;
     var text = document.getElementById('devider').firstChild;
     text.data = "Divider: 2";
     performHaarT(document.getElementById('originalImage'), this.value);
@@ -238,7 +253,7 @@ function OneDHaarTransformF(HaarMatrix) {
   for (var i = 0; i < hMLen; i++)
   {
     var sum = (HaarMatrix[2*i] + HaarMatrix[2*i + 1]) / 2;
-    var diff = (HaarMatrix[2*i] - HaarMatrix[2*i + 1]) / devider;
+    var diff = ( (HaarMatrix[2*i] - HaarMatrix[2*i + 1]) / devider);
     tempHaar[i] = sum;
     tempHaar[i + hMLen] = diff;
   };
@@ -252,8 +267,8 @@ function OneDHaarTransformB(HaarMatrix) {
   var tempHaar = [];
   for (var i = 0; i < hMLen; i++)
   {
-    var sum = (HaarMatrix[i] + HaarMatrix[i + hMLen]);
-    var diff = (HaarMatrix[i] - HaarMatrix[i + hMLen]);
+    var sum = (HaarMatrix[i] + (HaarMatrix[i + hMLen]));
+    var diff = (HaarMatrix[i] - (HaarMatrix[i + hMLen]));
     tempHaar[2*i] = sum;
     tempHaar[2*i + 1] = diff;
   };
@@ -351,6 +366,10 @@ function performHaarT(canvas, MaxStepHaar) {
 
   var id = "transformedImage";
   var rootElement = "transformed-image";
+
+  if(contrast){
+    altpix = betterContrast(altpix, width*4, height);
+  }
 
   drawArray(altpix, height, width, id, rootElement);
   haarTdata = deepCopy(Haar);
@@ -469,7 +488,6 @@ function writeArray(array, xStart, yStart, width, height, arrayWidth) {
 
 function partRepl(x,y,callback){
   //$(".clearfix").show();
-  console.log(x,y);
   var id = "transformedImage";
   var rootElement = "transformed-image";
   var width = haarTdata.length*4;
@@ -607,12 +625,34 @@ function partRepl(x,y,callback){
     fillArray(myArray, 0, 0, width/2, height/2, width, 0);
   };
 
+  if(contrast){
+    myArray = betterContrast(myArray, width, height);
+  }
+
   drawArray(myArray, height, width/4, id, rootElement);
   return new Promise(function (resolve, reject){
     resolve("success"); //if the action succeeded
     reject("error"); //if the action did not succeed
   });
 };
+
+function betterContrast(array, width, height){
+  var contrastData = [];
+  if (lvl == 2) {
+    contrastData = writeArray(array, 0, 0, width/4, height/4, width);
+    for (let index = 0; index < array.length; index++) {
+      array[index] = array[index] + 55;
+    };
+    writeBackArray(array, 0, 0, width/4, height/4, width, contrastData);
+  } else{
+    contrastData = writeArray(array, 0, 0, width/2, height/2, width);
+    for (let index = 0; index < array.length; index++) {
+      array[index] = array[index] + 55;
+    };
+    writeBackArray(array, 0, 0, width/2, height/2, width, contrastData);
+  }
+  return array
+}
 
 function chunkArray(myArray, height, width){
   var Haar = [];
