@@ -469,7 +469,7 @@ function writeArray(array, xStart, yStart, width, height, arrayWidth) {
 
 function partRepl(x,y,callback){
   //$(".clearfix").show();
-
+  console.log(x,y);
   var id = "transformedImage";
   var rootElement = "transformed-image";
   var width = haarTdata.length*4;
@@ -477,7 +477,7 @@ function partRepl(x,y,callback){
   var myArray = normalizeArray(deepCopy(haarTdata), height, width/4);
 
   if(lvl == 2){
-    if(x > 360 && x < 420 && y > 70 && y < 130){
+    if(x > 450 && x < 515 && y > 160 && y < 225){
       if (a1 == 0) {
         a1=1;
         area1 = writeArray(myArray, 0, 0, width/4, height/4, width);
@@ -486,7 +486,7 @@ function partRepl(x,y,callback){
         a1=0;
         writeBackArray(myArray, 0, 0, width/4, height/4, width, area1);
       };
-    }else if(x > 420 && x < 470 && y > 70 && y < 130){
+    }else if(x > 515 && x < 580 && y > 160 && y < 225){
       if (a2 == 0) {
         a2=1;
         area2 = writeArray(myArray, width/4, 0, width/4, height/4, width);
@@ -495,7 +495,7 @@ function partRepl(x,y,callback){
         a2 =0;
         writeBackArray(myArray, width/4, 0, width/4, height/4, width, area2);
       };
-    }else if(x > 360 && x < 420 && y > 130 && y < 190){
+    }else if(x > 450 && x < 515 && y > 225 && y < 290){
       if (a3 == 0) {
         a3=1;
         area3 = writeArray(myArray, 0, height/4, width/4, height/4, width);
@@ -504,7 +504,7 @@ function partRepl(x,y,callback){
         a3=0;
         writeBackArray(myArray, 0, height/4, width/4, height/4, width, area3);
       };
-    }else if(x > 420 && x < 470 && y > 130 && y < 190){
+    }else if(x > 515 && x < 580 && y > 225 && y < 290){
       if (a4 == 0) {
         a4=1;
         area4 = writeArray(myArray, width/4, height/4, width/4, height/4, width);
@@ -513,7 +513,7 @@ function partRepl(x,y,callback){
         a4=0;
         writeBackArray(myArray, width/4, height/4, width/4, height/4, width, area4);
       };
-    }else if(x > 360 && x < 470 && y > 190 && y < 310){
+    }else if(x > 450 && x < 580 && y > 290 && y < 410){
       if (a5 == 0) {
         a5=1;
         area5 = writeArray(myArray, 0, height/2, width/2, height/2, width);
@@ -522,7 +522,7 @@ function partRepl(x,y,callback){
         a5=0;
         writeBackArray(myArray, 0, height/2, width/2, height/2, width, area5);
       };
-    }else if(x > 470 && x < 600 && y > 190 && y < 310){
+    }else if(x > 580 && x < 710 && y > 290 && y < 410){
       if (a6 == 0) {
         a6=1;
         area6 = writeArray(myArray, width/2, height/2, width/2, height/2, width);
@@ -531,7 +531,7 @@ function partRepl(x,y,callback){
         a6=0;
         writeBackArray(myArray, width/2, height/2, width/2, height/2, width, area6);
       };
-    }else if(x > 470 && x < 600 && y > 70 && y < 190){
+    }else if(x > 580 && x < 710 && y > 160 && y < 290){
       if (a7 == 0) {
         a7=1;
         area7 = writeArray(myArray, width/2, 0, width/2, height/2, width);
@@ -542,7 +542,7 @@ function partRepl(x,y,callback){
       };
     };
   } else{
-    if(x > 360 && x < 470 && y > 70 && y < 190){
+    if(x > 450 && x < 580 && y > 160 && y < 290){
       if (a8 == 0) {
         a8=1;
         area8 = writeArray(myArray, 0, 0, width/2, height/2, width);
@@ -551,7 +551,7 @@ function partRepl(x,y,callback){
         a8=0;
         writeBackArray(myArray, 0, 0, width/2, height/2, width, area8);
       };
-    }else if(x > 360 && x < 470 && y > 190 && y < 310){
+    }else if(x > 450 && x < 580 && y > 290 && y < 410){
       if (a5 == 0) {
         a5=1;
         area5 = writeArray(myArray, 0, height/2, width/2, height/2, width);
@@ -560,7 +560,7 @@ function partRepl(x,y,callback){
         a5=0;
         writeBackArray(myArray, 0, height/2, width/2, height/2, width, area5);
       };
-    }else if(x > 470 && x < 600 && y > 190 && y < 310){
+    }else if(x > 580 && x < 710 && y > 290 && y < 410){
       if (a6 == 0) {
         a6=1;
         area6 = writeArray(myArray, width/2, height/2, width/2, height/2, width);
@@ -569,7 +569,7 @@ function partRepl(x,y,callback){
         a6=0;
         writeBackArray(myArray, width/2, height/2, width/2, height/2, width, area6);
       };
-    }else if(x > 470 && x < 600 && y > 70 && y < 190){
+    }else if(x > 580 && x < 710 && y > 160 && y < 290){
       if (a7 == 0) {
         a7=1;
         area7 = writeArray(myArray, width/2, 0, width/2, height/2, width);
@@ -583,39 +583,30 @@ function partRepl(x,y,callback){
   haarTdata =  deepCopy(chunkArray(myArray, height, width/4));
 
   if(a1 == 1){
-    console.log("a1")
     fillArray(myArray, 0, 0, width/4, height/4, width, 0);
   };
   if(a2 == 1){
-    console.log("a2")
     fillArray(myArray, width/4, 0, width/4, height/4, width, 0);
   };
   if(a3 == 1){
-    console.log("a3")
     fillArray(myArray, 0, height/4, width/4, height/4, width, 0);
   };
   if(a4 == 1){
-    console.log("a4")
     fillArray(myArray, width/4, height/4, width/4, height/4, width, 0);
   };
   if(a5 == 1){
-    console.log("a5")
     fillArray(myArray, 0, height/2, width/2, height/2, width, 0);
   };
   if(a6 == 1){
-    console.log("a6")
     fillArray(myArray, width/2, height/2, width/2, height/2, width, 0);
   };
   if(a7 == 1){
-    console.log("a7")
     fillArray(myArray, width/2, 0, width/2, height/2, width, 0);
   };
   if(a8 == 1){
-    console.log("a8")
     fillArray(myArray, 0, 0, width/2, height/2, width, 0);
   };
 
-  console.log(myArray)
   drawArray(myArray, height, width/4, id, rootElement);
   return new Promise(function (resolve, reject){
     resolve("success"); //if the action succeeded
