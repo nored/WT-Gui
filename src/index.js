@@ -40,7 +40,7 @@ deviderBtn.addEventListener('click', (event) => {
       handleImage(filePath);
     };
     var text = document.getElementById('devider').firstChild;
-    text.data = text.data == "Devider: 2" ? "Devider: sqrt(2)" : "Devider: 2";
+    text.data = text.data == "Divider: 2" ? "Divider: sqrt(2)" : "Divider: 2";
   }
 });
 
@@ -52,7 +52,7 @@ revert.addEventListener('click', (event) => {
     dvdr = false;
     devider = 2;
     var text = document.getElementById('devider').firstChild;
-    text.data = "Devider: 2";
+    text.data = "Divider: 2";
     handleImage(filePath);
   }
 });
@@ -64,7 +64,7 @@ selectDirBtn.addEventListener('click', (event) => {
   dvdr = false;
   devider = 2;
   var text = document.getElementById('devider').firstChild;
-  text.data = "Devider: 2";
+  text.data = "Divider: 2";
   ipcRenderer.send('open-file-dialog')
 });
 
@@ -95,7 +95,7 @@ window.addEventListener("load", function(){
     dvdr = false;
     devider = 2;
     var text = document.getElementById('devider').firstChild;
-    text.data = "Devider: 2";
+    text.data = "Divider: 2";
     performHaarT(document.getElementById('originalImage'), this.value);
   });
 });
